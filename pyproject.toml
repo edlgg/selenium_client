@@ -10,3 +10,6 @@ readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{ name = "Eduardo de la Garza", email = "eduardo@delagarzaguerra.com"
 dependencies = []  # Add dependencies here (e.g., ["requests"])
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
