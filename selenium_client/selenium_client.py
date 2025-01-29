@@ -14,16 +14,17 @@ CURRENT_DIR = Path(__file__).resolve().parent
 tmp_dir = CURRENT_DIR / "../../tmp"
 
 class SeleniumClient:
-    def __init__(self, browser='firefox'):
-        self.driver: webdriver = self.get_driver(browser)
+    def __init__(self, browser='firefox', headless: bool=False, half_screen: bool = False):
+        self.driver: webdriver = self.get_driver(browser, headless, half_screen)
         self.driver.set_page_load_timeout(10)
 
-    def get_driver(self, browser) -> webdriver:
+    def get_driver(self, browser, headless: bool, half_screen: bool ) -> webdriver:
         if browser == 'firefox':
             options = webdriver.FirefoxOptions()
-            if os.environ["ENV"] in ["prod", "staging"]:
+            if half_screen:
                 options.add_argument('--width=900')
                 options.add_argument('--height=1080')
+            if headless:
                 options.add_argument('--headless')
 
             service_log_file = str(CURRENT_DIR / "../../geckodriver.log")
