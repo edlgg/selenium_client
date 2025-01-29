@@ -1,0 +1,4 @@
+selenium == 4.6
+webdriver-manager
+pyvirtualdisplay
+beautifulsoup4

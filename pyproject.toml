@@ -5,7 +5,12 @@ description = "A simple Selenium Client"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [{ name = "Eduardo de la Garza", email = "eduardo@delagarzaguerra.com" }]
-dependencies = []  # Add dependencies here (e.g., ["requests"])
+dependencies = [
+    "selenium == 4.6",
+    "webdriver-manager",
+    "pyvirtualdisplay",
+    "beautifulsoup4"
+]
 
 [build-system]
 requires = ["setuptools", "wheel"]
