@@ -21,11 +21,11 @@ class SeleniumClient:
     def get_driver(self, browser, headless: bool, half_screen: bool ) -> webdriver:
         if browser == 'firefox':
             options = webdriver.FirefoxOptions()
-            if half_screen:
-                options.add_argument('--width=900')
-                options.add_argument('--height=1080')
             if headless:
                 options.add_argument('--headless')
+                if half_screen:
+                    options.add_argument('--width=900')
+                    options.add_argument('--height=1080')
 
             service_log_file = str(CURRENT_DIR / "../../geckodriver.log")
             firefox_binary_location = "/usr/bin/firefox"
@@ -86,6 +86,12 @@ class SeleniumClient:
     # def click_by_text_contains(self, text):
     #     element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, f"//*[contains(text(), '{text}')]")))
     #     element.click() 
+
+    def get_by_css_selector(self, container_selection):
+        scrollable_div = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, container_selection))
+        )
+        return scrollable_div
 
     def get_by_text_contains(self, text):
         try:
@@ -300,3 +306,6 @@ class SeleniumClient:
         import mouse
         mouse.move("107", "575")
         mouse.click(button='left')
+
+    def get_url(self):
+        return self.driver.current_url
